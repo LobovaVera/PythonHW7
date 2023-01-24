@@ -1,39 +1,42 @@
 import view
-global action
-action = 0 
-global phone_book
-phone_book = []
+import main
 
 def start():
-    commands = {1: 'Показать все контакты',
-    2: 'Открыть файл',
-    3: 'Сохранить файл',
-    4: 'Новый контакт',
-    5: 'Изменить контакт',
-    6: 'Удалить контакт',
-    7: 'Найти контакт',
-    8: 'Выйти из программы'}
-
-    print( f"Выберите пункт меню")
-    print(f" {commands}")
-    get_action()
 
 
-def get_action():
-    global action 
-    try:
-        action = int(input("Введите число команды: "))
-    except ValueError:
-        print("Введите число цифрами без пробелов")
+    view.main_menu()
+    act = view.action()
+    main.activate_phone_book()
+
+    match act:
+        case 1:
+            main.show_contacts()
+          
+        case 2:
+            main.open_name()
+            view.show(main.open_name())
+           
+        case 3:
+            
+            view.show(main.save_new_contact(view.my_input()))
+          
+        case 4:
+            view.create_contact()
+            
+        case 5:
+            main.change_contact()
+          
+        case 6:
+            main.delete_contact()
+          
+        case 7:
+            main.search_contact()
+        case 8:
+            exit()
+    start()
+  
+        
+
     
-def show_contacts():
-    path = 'PHONE_BOOK\data.txt'
-    with open(path, 'r', encoding = 'UTF-8') as file:
-        data = file.readlines()
-    for line in data:
-        phone_book.append(line.strip().split(';'))
-    for line in phone_book:
-        print( f"{line} \n")
-
-#  def open_():
+start()
 
