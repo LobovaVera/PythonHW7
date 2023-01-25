@@ -47,16 +47,13 @@ def show(data):
     print(data)
 
 
-def get_contact_info(num):
+def get_contact_info():
     global temp
     temp = []
-    match num:
-        case 1:
-            temp.append(input("Введите фамилию имя и отчество: ") )
-        case 2:
-            temp.append(input("Введите номер: "))
-        case 3:
-            temp.append(input("Введите комментарий: "))
+
+    temp.append(input("Введите фамилию имя и отчество: ") +';')
+    temp.append(input("Введите номер: ") +';')
+    temp.append(input("Введите комментарий: "))
     
     return temp
 
@@ -92,3 +89,5 @@ def get_approve():
             print("Введите цифру 0 или 1")
         continue
     
+def deleted():
+    print("Контакт удален! ")

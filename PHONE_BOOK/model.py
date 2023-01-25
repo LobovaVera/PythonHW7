@@ -23,18 +23,22 @@ def open_name():
     return "Вы открыли телефонную книгу"
     
 
-def save_new_contact(contact: str):
-    print(f"Сохранить контакт {contact} ?")
+def save_new_contact(contact):
+    # print(f"Сохранить контакт {contact} ?")
     try:
         temp_bool = int(input(" 1 - да, 0 - нет"))
     except ValueError:
         print("Введите цифру 0 или 1")
 
     if temp_bool:
+        temp_str = ''
+        for el in contact:
+            temp_str +=el
+
         global path
         path = 'PHONE_BOOK\data.txt'
         with open(path, 'a', encoding = 'UTF-8') as file:
-            data = file.writelines(contact + '\n')
+            data = file.writelines(temp_str + '\n')
         print("Контакт добавлен")  
     else:
         print("Контакт не сохранен")
@@ -66,9 +70,7 @@ def change_contact():
     cont_num = view.get_contact_num()
 
     print(f"Изменим контакт {cont_num} {phone_book[int(cont_num)-1]}")
-    contact = []
-    for i in range(1,4):
-        contact.append(view.get_contact_info(i))
+    contact = view.get_contact_info()
 
     phone_book.pop(int(cont_num)-1)
     phone_book.insert(int(cont_num)-1, contact)
@@ -80,21 +82,17 @@ def delete_contact():
     global contact
     global path
     global phone_book
-    num = 0 
 
-    view.show_contacts(phone_book)
     view.show_contacts(phone_book)
     cont_num = view.get_contact_num()
-    
 
-    print(f"Удалим контакт {cont_num} {phone_book[num-1]}?")
+    print(f"Удалим контакт {cont_num} {phone_book[int(cont_num)-1]}?")
     temp_bool = view.get_approve()
     
     if temp_bool:
-        phone_book.pop(num-1)
-        update_phone_book()
-
-
+        phone_book.pop(int(cont_num)-1)
+        update_phone_book(phone_book)
+        view.deleted()
 
 
 def search_contact():
@@ -118,8 +116,6 @@ def search_contact():
 def create_contact():
     global contact 
     contact = []
-    for i in range(1, 4):
-        contact.append(str(view.get_contact_info(i)) +';')
-
-    save_new_contact(str(contact))
+    contact = view.get_contact_info()
+    save_new_contact(contact)
 

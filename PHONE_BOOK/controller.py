@@ -1,9 +1,7 @@
 import view
 import model
-import time
 
 def start():
-
 
     view.model_menu()
     act = view.action()
@@ -19,19 +17,17 @@ def start():
             view.show(model.open_name())
            
         case 3:
-            
             view.show(model.save_new_contact(view.my_input()))
           
         case 4:
             model.create_contact()
           
-            
         case 5:
             model.change_contact()
           
         case 6:
             model.delete_contact()
-          
+
         case 7:
             model.search_contact()
         case 8:
