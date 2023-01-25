@@ -25,10 +25,12 @@ def open_name():
 
 def save_new_contact(contact):
     # print(f"Сохранить контакт {contact} ?")
-    try:
-        temp_bool = int(input(" 1 - да, 0 - нет"))
-    except ValueError:
-        print("Введите цифру 0 или 1")
+    view.show(f"Сохранить контакт {contact} ?")
+    temp_bool = view.get_approve()
+    # try:
+    #     temp_bool = int(input(" 1 - да, 0 - нет"))
+    # except ValueError:
+    #     print("Введите цифру 0 или 1")
 
     if temp_bool:
         temp_str = ''
@@ -39,9 +41,11 @@ def save_new_contact(contact):
         path = 'PHONE_BOOK\data.txt'
         with open(path, 'a', encoding = 'UTF-8') as file:
             data = file.writelines(temp_str + '\n')
-        print("Контакт добавлен")  
+        # print("Контакт добавлен")  
+        view.show("Контакт добавлен")
     else:
-        print("Контакт не сохранен")
+        # print("Контакт не сохранен")
+        view.show("Контакт не сохранен")
   
 
 def update_phone_book(book):
@@ -69,7 +73,8 @@ def change_contact():
     view.show_contacts(phone_book)
     cont_num = view.get_contact_num()
 
-    print(f"Изменим контакт {cont_num} {phone_book[int(cont_num)-1]}")
+    # print(f"Изменим контакт {cont_num} {phone_book[int(cont_num)-1]}")
+    view.show(f"Изменим контакт {cont_num} {phone_book[int(cont_num)-1]}")
     contact = view.get_contact_info()
 
     phone_book.pop(int(cont_num)-1)
@@ -86,7 +91,8 @@ def delete_contact():
     view.show_contacts(phone_book)
     cont_num = view.get_contact_num()
 
-    print(f"Удалим контакт {cont_num} {phone_book[int(cont_num)-1]}?")
+    # print(f"Удалим контакт {cont_num} {phone_book[int(cont_num)-1]}?")
+    view.show((f"Удалим контакт {cont_num} {phone_book[int(cont_num)-1]}?"))
     temp_bool = view.get_approve()
     
     if temp_bool:
@@ -99,7 +105,7 @@ def search_contact():
     activate_phone_book()
     global phone_book
 
-    search = input("Введите информацию для поиска: ")
+    search = view.search_input()
     temp_bool = True
     for line in phone_book:
         for field in line:

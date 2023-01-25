@@ -91,3 +91,6 @@ def get_approve():
     
 def deleted():
     print("Контакт удален! ")
+
+def search_input():
+    return input("Введите информацию для поиска: ")
