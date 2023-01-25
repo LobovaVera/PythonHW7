@@ -1,36 +1,39 @@
 import view
-import main
+import model
+import time
 
 def start():
 
 
-    view.main_menu()
+    view.model_menu()
     act = view.action()
-    main.activate_phone_book()
+    model.activate_phone_book()
 
     match act:
         case 1:
-            main.show_contacts()
+            a = model.activate_phone_book()
+            view.show_contacts(a)
           
         case 2:
-            main.open_name()
-            view.show(main.open_name())
+            model.open_name()
+            view.show(model.open_name())
            
         case 3:
             
-            view.show(main.save_new_contact(view.my_input()))
+            view.show(model.save_new_contact(view.my_input()))
           
         case 4:
-            view.create_contact()
+            model.create_contact()
+          
             
         case 5:
-            main.change_contact()
+            model.change_contact()
           
         case 6:
-            main.delete_contact()
+            model.delete_contact()
           
         case 7:
-            main.search_contact()
+            model.search_contact()
         case 8:
             exit()
     start()
@@ -38,5 +41,5 @@ def start():
         
 
     
-start()
+
 

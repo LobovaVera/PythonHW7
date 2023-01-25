@@ -1,4 +1,4 @@
-import main
+
 
 contact =''
 
@@ -13,10 +13,14 @@ my_action = 0
 # def get_action():
 #     global my_action
 #     return my_action
+global phone_book
+phone_book = []
+path = 'PHONE_BOOK\data.txt'
 
-def main_menu():
+
+def model_menu():
     command = {1: 'Показать все контакты',
-    2: 'Открыть файл',
+    2: 'Открыть файл', 
     3: 'Сохранить файл',
     4: 'Новый контакт',
     5: 'Изменить контакт',
@@ -42,31 +46,49 @@ def action():
 def show(data):
     print(data)
 
-def create_contact():
-    global contact 
-    contact = ''
-    temp = input("Введите фамилию: ")
-    contact += temp + ' '
-    temp = input("Введите имя: ")
-    contact += temp + ' '
-    temp = input("Введите отчество: ")
-    contact += temp + ';'
-    temp = input("Введите номер: ")
-    contact += temp + ';'
-    temp = input("Введите комментарий: ")
-    contact += temp + ';'
 
-    print(f"Сохранить контакт {contact} ?")
-    try:
-        temp_bool = int(input(" 1 - да, 0 - нет"))
-    except ValueError:
-        print("Введите цифру 0 или 1")
+def get_contact_info(num):
+    global temp
+    temp = []
+    match num:
+        case 1:
+            temp.append(input("Введите фамилию имя и отчество: ") )
+        case 2:
+            temp.append(input("Введите номер: "))
+        case 3:
+            temp.append(input("Введите комментарий: "))
+    
+    return temp
 
-    if temp_bool:
-        
-        print(main.save_new_contact(contact))
-    else:
-        print("Контакт не сохранен")
 
 def my_input():
     return input("Введите информацию, чтобы сохранить: ")
+
+def get_contact_num():
+    while True:
+        cont_num = input("Выберите контакт, введите номер контакта: ")
+        try: 
+            num = int(cont_num)
+            return cont_num
+        except:
+            print("Введите цифру")
+            continue
+
+def show_contacts(book):
+    for i in range(0, len(book)):
+        print( f"{i+1} {book[i]} \n")
+
+def get_approve():
+    our_bool = True
+    while True:
+        try:
+            a =  int(input(" 1 - да, 0 - нет"))
+            if a:
+                our_bool = True
+            else:
+                our_bool = False
+            return our_bool
+        except ValueError:
+            print("Введите цифру 0 или 1")
+        continue
+    
